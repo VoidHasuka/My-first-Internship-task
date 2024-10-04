@@ -79,7 +79,7 @@ public class ScenesRander : MonoBehaviour
     bool ShouldSpawnMonster(Vector3Int tilePosition)
     {
         // 生成概率
-        float spawnChance = 0.002f; // 0.2%生成概率，因为每一片Tile都很小的
+        float spawnChance = 0.002f; // 0.2%生成概率，因为每一片Tile都要执行一次，然后一片Tile又很小
         return Random.value < spawnChance;
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    //基础脚本，给Monster和Player继承用的
     protected Rigidbody2D rb;
     protected Animator anim;
 

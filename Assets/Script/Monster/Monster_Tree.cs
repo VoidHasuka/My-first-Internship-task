@@ -29,6 +29,7 @@ public class Monster_Tree : Monster
 
     public void KeepHealth()
     {
+        //保持树的无敌
         Character ch = GetComponent<Character>();
         if(ch != null)
         {

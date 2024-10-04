@@ -35,8 +35,7 @@ public class Monster_Boomer : Monster
     {
         float now_dir_x = dir_x / Mathf.Abs(dir_x);
         float now_dir_y = dir_y / Mathf.Abs(dir_y);
-        if (Mathf.Abs(dir_y) > 1 && Mathf.Abs(dir_x)>1)
-                    {
+       
             if (dir_x != 0 && dir_y != 0)
             {
                 rb.velocity = new Vector2(now_dir_x * move_speed * sqrt, now_dir_y * move_speed * sqrt);
@@ -45,7 +44,6 @@ public class Monster_Boomer : Monster
             {
                 rb.velocity = new Vector2(now_dir_x * move_speed, now_dir_y * move_speed);
             }
-        }
     }
 
     protected void AnimationControllers()

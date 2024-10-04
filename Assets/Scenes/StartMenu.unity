@@ -179,6 +179,7 @@ MonoBehaviour:
   buttonText: {fileID: 404186759}
   normalTextColor: {r: 1, g: 0.3137255, b: 0.33333334, a: 1}
   highlightedTextColor: {r: 1, g: 1, b: 1, a: 1}
+  audioButton: {fileID: 2686723505440017540}
 --- !u!114 &105816840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,6 +723,10 @@ PrefabInstance:
       propertyPath: m_ReferenceResolution.y
       value: 1440
       objectReference: {fileID: 0}
+    - target: {fileID: 6385287787976244573, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
+      propertyPath: audioButton
+      value: 
+      objectReference: {fileID: 2686723505440017540}
     - target: {fileID: 7979346662690054339, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.57
@@ -730,6 +735,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3.6
       objectReference: {fileID: 0}
+    - target: {fileID: 8011235441896849565, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
+      propertyPath: audioButton
+      value: 
+      objectReference: {fileID: 2686723505440017540}
+    - target: {fileID: 8267849097798463900, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
+      propertyPath: audioButton
+      value: 
+      objectReference: {fileID: 2686723505440017540}
     - target: {fileID: 8529185247073811368, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -737,6 +750,10 @@ PrefabInstance:
     - target: {fileID: 8529185247073811368, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826881597943386644, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WeaponChoose
       objectReference: {fileID: 0}
     - target: {fileID: 9160039453143958171, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
       propertyPath: m_LocalScale.x
@@ -764,13 +781,36 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 660446428873439201, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
       insertIndex: 2
       addedObject: {fileID: 105816838}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 917209058852356209, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2686723505440017540}
   m_SourcePrefab: {fileID: 100100000, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
 --- !u!224 &2686723505440017538 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 660446428873439201, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
   m_PrefabInstance: {fileID: 2686723505440017537}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2686723505440017539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 917209058852356209, guid: eedbe9478000d9a4c805537da50b45ff, type: 3}
+  m_PrefabInstance: {fileID: 2686723505440017537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2686723505440017540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686723505440017539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d6b21194d0f584389bad886d9729f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playAudioEvent: {fileID: 11400000, guid: b13f8b7764d307246a4ea6cc343b12de, type: 2}
+  audioClip: {fileID: 8300000, guid: 7e2e4e604dfebba4a92f67092b0bed53, type: 3}
+  playOnEnable: 0
 --- !u!1001 &2860576563991769343
 PrefabInstance:
   m_ObjectHideFlags: 0

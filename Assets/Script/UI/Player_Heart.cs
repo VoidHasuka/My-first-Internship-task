@@ -44,7 +44,7 @@ public class Player_Heart : MonoBehaviour
         }
     }
 
-    // 每次玩家升级时调用，当满血时动态添加一个Heart
+    // 每次玩家升级时调用，当满血时动态添加一个Heart，不过动画问题...和前面的心不同步的
     public void AddHeart()
     {
         // 创建空心Heart
@@ -68,11 +68,7 @@ public class Player_Heart : MonoBehaviour
             // 在最后一个Heart的基础上加上偏移量
             heartRect2.anchoredPosition = lastHeartPosition + offset;
         }
-        else
-        {
-            // 如果是第一个Heart，放置在默认位置
-            heartRect2.anchoredPosition = new Vector2(0f, 0f);
-        }
+        //如果Heart容器空了...那就是游戏出bug了，和这里没关系
 
         // 将空心Heart添加到列表中（只是用于确认位置）
         healthImages.Add(heartImage1);

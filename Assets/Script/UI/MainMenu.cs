@@ -5,7 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-   public void PlayGame()
+   
+    public void WeaponChoose()
+    {
+        SceneManager.LoadScene("WeaponMenu");
+    }
+    
+    
+    public void PlayGame()
     {
         SceneManager.LoadScene("PlayScene");
     }
@@ -13,5 +20,10 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void StartMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 }

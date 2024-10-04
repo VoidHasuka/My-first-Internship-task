@@ -7,7 +7,6 @@ public class Player_Arrow : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private Transform player_transform;
-    private float distanceFromPlayer = 1f;
 
     [SerializeField] public GameObject bulletPrefab; // 子弹预制体
     public Transform firePoint; // 子弹的发射位置
@@ -37,6 +36,8 @@ public class Player_Arrow : MonoBehaviour
 
     [SerializeField] private AudioDefination audioShoot; //射击音效
     [SerializeField] private AudioDefination audioReload; //换弹音效
+
+    public float anglePos = 0; //Position旋转
 
     void Start()
     {
@@ -95,10 +96,15 @@ public class Player_Arrow : MonoBehaviour
 
     private void ArrowRotation()
     {
-        Vector3 direction = (cursor.position - player_transform.position).normalized;
+        Vector3 direction = (cursor.position - player_transform.position).normalized; //用旋转矩阵
+
+        Vector3 pos = new Vector3(direction.x * Mathf.Cos(anglePos)-direction.y* Mathf.Sin(anglePos), direction.x*Mathf.Sin(anglePos)+direction.y* Mathf.Cos(anglePos), 0);
+
 
         // 计算武器的目标位置
-        Vector3 weaponPosition = player_transform.position + direction * distanceFromPlayer;
+        Vector3 weaponPosition = pos + (player_transform.position);
+
+
 
         transform.position = weaponPosition; // 设置武器的位置
 

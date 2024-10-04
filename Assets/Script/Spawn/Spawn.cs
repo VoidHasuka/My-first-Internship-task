@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    [SerializeField] protected GameObject enemyPrefab; // 敌人预制体
+    //怪物随机生成
+    [SerializeField] protected GameObject enemyPrefab; // 怪物预制体
     
     [SerializeField] protected int enemyCount = 5; // 每次生成的敌人数目
 

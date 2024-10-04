@@ -27,6 +27,8 @@ public class Player : Entity
     [SerializeField] private Animator ReplaceBullet; //技能动画
     [SerializeField] private Animator ReplaceBar; //换弹进度条
     [SerializeField] private Animator ReplaceKey; //换弹节点
+    [SerializeField] private GameObject PlayerGun; //相当来说升级增加枪的数量也是很神奇的想法
+    private float gunAngle = 0.0f;
 
     [Header("Exp info")]
     //升级要调用的东西是真的多
@@ -38,6 +40,7 @@ public class Player : Entity
     [SerializeField] private Player_Heart playerHeart;//HeartUI调用
     [SerializeField] private Character playerChar; //玩家的Character
     [SerializeField] private Attack BulletAttack; //Bullet的Attack
+    [SerializeField] private Animator LevelUp; //升级特效
 
     [Header("Sound info")]
     //受伤特效
@@ -167,6 +170,7 @@ public class Player : Entity
         }
     }
 
+    //玩家角色转向仅与Cursor（靶心）有关
     protected override void FlipController()
     {
         float CursorToPlayer = cursor.position.x - transform.position.x;
@@ -189,6 +193,14 @@ public class Player : Entity
             CurrentExp = exp.expAmount + CurrentExp - MaxExp;
             MaxExp += 10;
             Level++;
+            LevelUp.SetTrigger("LevelUp");
+
+
+            //加枪！
+            if (UnityEngine.Random.Range(0f, 1f) > 0.5f)
+            {
+                AddWeapon();
+            }
 
             //满血升级则增加血量上限
             if(playerChar.current_health == playerChar.max_health)
@@ -222,4 +234,13 @@ public class Player : Entity
     {
         ExpText.text = "Level     " + Level.ToString();
     }
+
+    private void AddWeapon()
+    {
+        gunAngle += (15.0f/180)*3.1415f;
+        GameObject newGun = Instantiate(PlayerGun, transform.position, transform.rotation);
+        newGun.transform.SetParent(transform);
+        newGun.GetComponent<Player_Arrow>().anglePos = gunAngle;
+    }
+
 }

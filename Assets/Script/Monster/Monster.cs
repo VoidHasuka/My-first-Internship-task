@@ -49,7 +49,11 @@ public class Monster : Entity
 
     protected override void FlipController()
     {
+        //避免说有抽搐现象
+        if (Mathf.Abs(dir_y) > 1 && Mathf.Abs(dir_x) > 1)
+        {
             base.FlipController();
+        }
     }
 
     public void MonsterHurt()

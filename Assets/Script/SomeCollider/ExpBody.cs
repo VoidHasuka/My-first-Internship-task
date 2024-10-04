@@ -46,7 +46,7 @@ public class ExpBody : MonoBehaviour
         }
     }
 
-        //碰撞之后执行的内容
+        //碰撞之后角色经验增加
     private void OnTriggerStay2D(Collider2D other)
     {
         other.GetComponent<Player>()?.TakeExp(this);
