@@ -136,6 +136,7 @@ MonoBehaviour:
   gunLight: {fileID: 7088012935724175445}
   audioShoot: {fileID: 8182061793134653983}
   audioReload: {fileID: 5522849866220454384}
+  anglePos: 0
 --- !u!114 &8182061793134653983
 MonoBehaviour:
   m_ObjectHideFlags: 0

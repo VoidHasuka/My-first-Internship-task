@@ -13,6 +13,21 @@ public class Destroy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void ReturnObject()
+    {
+        if (transform.parent != null)
+        {
+            ObjectPoolManager.ReturnObject(transform.parent.gameObject);
+        }
+    }
+
+    //¸øboomerµÄ
+    public void MonsterDead()
+    {
+        transform.parent.gameObject.GetComponent<Monster_Boomer>().SetLayerDead();
+        transform.parent.gameObject.GetComponent<Monster_Boomer>().MonsterDead();
+    }
+
     public void HideObject()
     {
         gameObject.SetActive(false);

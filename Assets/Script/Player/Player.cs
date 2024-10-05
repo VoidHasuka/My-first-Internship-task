@@ -28,6 +28,7 @@ public class Player : Entity
     [SerializeField] private Animator ReplaceBar; //换弹进度条
     [SerializeField] private Animator ReplaceKey; //换弹节点
     [SerializeField] private GameObject PlayerGun; //相当来说升级增加枪的数量也是很神奇的想法
+    [SerializeField] private float addChance = 0.3f;
     private float gunAngle = 0.0f;
 
     [Header("Exp info")]
@@ -39,7 +40,7 @@ public class Player : Entity
     [SerializeField] private TextMeshProUGUI ExpText; // 等级显示
     [SerializeField] private Player_Heart playerHeart;//HeartUI调用
     [SerializeField] private Character playerChar; //玩家的Character
-    [SerializeField] private Attack BulletAttack; //Bullet的Attack
+    static public int bulletDamage;
     [SerializeField] private Animator LevelUp; //升级特效
 
     [Header("Sound info")]
@@ -54,9 +55,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
-        //恢复子弹资产的伤害
-        BulletAttack.damage = 10;
-
+        bulletDamage = 10;
     }
 
     protected override void Update()
@@ -197,9 +196,10 @@ public class Player : Entity
 
 
             //加枪！
-            if (UnityEngine.Random.Range(0f, 1f) > 0.5f)
+            if (UnityEngine.Random.Range(0f, 1f) < addChance)
             {
                 AddWeapon();
+                addChance -= 0.05f;
             }
 
             //满血升级则增加血量上限
@@ -216,10 +216,10 @@ public class Player : Entity
                 playerChar.current_health++;
                 playerHeart.OnHealthChange(playerChar.current_health);
             }
-           
 
-            //随机增加1到2点攻击力，这玩意是永久增加的，得在角色开始时恢复
-            BulletAttack.damage += UnityEngine.Random.Range(1, 3);
+
+            //随机增加1到2点攻击力
+            bulletDamage += UnityEngine.Random.Range(1, 3);
         }
         else
         {
@@ -237,7 +237,7 @@ public class Player : Entity
 
     private void AddWeapon()
     {
-        gunAngle += (15.0f/180)*3.1415f;
+        gunAngle += (52.0f/180)*3.1415f;
         GameObject newGun = Instantiate(PlayerGun, transform.position, transform.rotation);
         newGun.transform.SetParent(transform);
         newGun.GetComponent<Player_Arrow>().anglePos = gunAngle;

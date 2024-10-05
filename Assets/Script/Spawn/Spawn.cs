@@ -8,6 +8,7 @@ public class Spawn : MonoBehaviour
     [SerializeField] protected GameObject enemyPrefab; // 怪物预制体
     
     [SerializeField] protected int enemyCount = 5; // 每次生成的敌人数目
+    static private int MonsterPollNum = 25; //在对象池中的怪物的最大数目
 
     protected Transform playerTransform; // 玩家位置
     [SerializeField] protected float minDistance = 20f; // 最小生成距离
@@ -16,12 +17,15 @@ public class Spawn : MonoBehaviour
     protected float SpawnCoolDown; //生成冷却
     [SerializeField] protected float SpawnCoolTime = 5; //生成冷却时间
 
+    public Character monsterChar;
+
     protected virtual void Start()
     {
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform; //查找玩家位置
         }
+        ObjectPoolManager.SetPoolSize(enemyPrefab, MonsterPollNum); //对象池初始化
     }
 
     protected virtual void Update()
@@ -48,7 +52,17 @@ public class Spawn : MonoBehaviour
             Vector3 spawnPosition = playerTransform.position + new Vector3(Mathf.Cos(angle) * distance, Mathf.Sin(angle) * distance, 0);
 
             // 生成敌人
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            ObjectPoolManager.GetObject(enemyPrefab, spawnPosition, Quaternion.identity);
+
         }
     }
+
+
+
+
+
+
+
+
+
 }

@@ -18,6 +18,7 @@ public class Player_Arrow : MonoBehaviour
 
     [SerializeField] private int BulletMaxNum; // 子弹数
     private int BulletNowNum;
+    static private int BulletPollNum = 40; //在对象池中的子弹最大数目，每次新枪创建了就加个10
 
     private Animator anim;
 
@@ -47,6 +48,9 @@ public class Player_Arrow : MonoBehaviour
 
         gunLight.enabled = false; // 开始时禁用灯光
 
+        ObjectPoolManager.SetPoolSize(bulletPrefab, BulletPollNum); //对象池初始化
+        BulletPollNum += 40;
+
         // 初始化显示子弹数量
         UpdateAmmoText();
     }
@@ -72,9 +76,7 @@ public class Player_Arrow : MonoBehaviour
                 //当前武器的技能发射子弹
                 float angle =(90f- i * (180f / (4 * BulletNowNum)));
                 Quaternion rotation = Quaternion.Euler(0, 0, angle);
-                Instantiate(bulletPrefab, firePoint.position, rotation);
-               
-               
+                ObjectPoolManager.GetObject(bulletPrefab, firePoint.position, rotation);
             }
             BulletNowNum = 0;
             audioShoot.PlayAudioClip(); //音效
@@ -118,11 +120,16 @@ public class Player_Arrow : MonoBehaviour
         // 实例化子弹预制体并设置发射位置，对玩家来说有一定的夹角
         float angle = 10f;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
-        Instantiate(bulletPrefab, firePoint.position, rotation);
+
+        ObjectPoolManager.GetObject(bulletPrefab, firePoint.position, rotation);
+
         angle = -10f;
         rotation = Quaternion.Euler(0, 0, angle);
-        Instantiate(bulletPrefab, firePoint.position, rotation);
+
+
+        ObjectPoolManager.GetObject(bulletPrefab, firePoint.position, rotation);
         //调用抖动
+
         GameController.camShake.Shake();
         // 激活灯光
         gunLight.enabled = true;
@@ -173,4 +180,8 @@ public class Player_Arrow : MonoBehaviour
     {
         audioReload.PlayAudioClip();
     }
+
+
+
+
 }

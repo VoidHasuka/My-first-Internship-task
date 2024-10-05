@@ -12,7 +12,15 @@ public class ExpBody : MonoBehaviour
     [SerializeField] private Vector3 move_dir;
     [SerializeField] private float move_speed;
     private float chaseDistance = 5f; // 追踪距离
+    private float lifetime = 30f; //生命周期
     [SerializeField] private AudioDefination audioDefination;//经验音效
+
+
+    private void Start()
+    {
+        //如果长时间未拾取就消失
+        DestroyWithTime();
+    }
 
     private void Awake()
     {
@@ -56,6 +64,11 @@ public class ExpBody : MonoBehaviour
     {
         audioDefination.PlayAudioClip();
         Destroy(gameObject);
+    }
+    
+    public void DestroyWithTime()
+    {
+        Destroy(gameObject, lifetime);
     }
 
     private Transform FindNearestTarget()

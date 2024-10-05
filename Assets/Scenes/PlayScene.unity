@@ -313,14 +313,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2101773720}
     - target: {fileID: 8254009244413527000, guid: 412f89309a8f5ac43baa5795db0ae64f, type: 3}
+      propertyPath: BGMSource
+      value: 
+      objectReference: {fileID: 1023449446}
+    - target: {fileID: 8254009244413527000, guid: 412f89309a8f5ac43baa5795db0ae64f, type: 3}
       propertyPath: totalTime
-      value: 300
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 8254009244413527000, guid: 412f89309a8f5ac43baa5795db0ae64f, type: 3}
       propertyPath: audioListener
       value: 
       objectReference: {fileID: 1023449446}
     - target: {fileID: 8446453802899788079, guid: 412f89309a8f5ac43baa5795db0ae64f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498414944242131037, guid: 412f89309a8f5ac43baa5795db0ae64f, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

@@ -18,6 +18,7 @@ public class LeaveTime : MonoBehaviour
     {
         WinMenuUI.SetActive(false);
         timeRemaining = totalTime; // 初始化
+        GameIsPaused = false;
     }
 
     void Update()
@@ -38,8 +39,8 @@ public class LeaveTime : MonoBehaviour
                 BGMSource.loop = false;
                 //播放小曲
                 WinSound.PlayAudioClip();
+                GameIsPaused = true;
                 Time.timeScale = 0.0f;
-                GameIsPaused = true;      
             }
         }
     }

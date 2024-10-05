@@ -173,6 +173,8 @@ MonoBehaviour:
   monster: {fileID: 313496283899828973}
   move_speed: 2
   ExpPrefab: {fileID: 8727515983024804081, guid: 53efaf7027f72884b84afab792b6fe3b, type: 3}
+  ExpNowSpawn: 0
+  is_dead: 0
   deadAudio: {fileID: 9056647960355619457}
 --- !u!114 &1838704074007883944
 MonoBehaviour:

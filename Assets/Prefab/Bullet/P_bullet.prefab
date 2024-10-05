@@ -105,7 +105,8 @@ MonoBehaviour:
   angle: 0
   move_dir: {x: 0, y: 0, z: 0}
   move_speed: 15
-  lifetime: 5
+  lifetime: 3
+  bulletPrefab: {fileID: 0}
 --- !u!70 &4712056556108234174
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -153,10 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21835795b459f154395638b385d66888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_health: 999
+  max_health: 9999
   current_health: 0
-  invincible_time: 0.5
+  invincible_time: 0
   invincible_counter: 0
+  floatPoint: {fileID: 0}
   on_take_damage:
     m_PersistentCalls:
       m_Calls:
@@ -190,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc027c4d194606d40a2b537950c25492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 12
   attack_range: 0
   attack_rate: 0
 --- !u!1 &2552383971836225097

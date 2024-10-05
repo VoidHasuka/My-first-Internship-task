@@ -30,10 +30,11 @@ public class Monster_Brain : Monster
 
     protected void UpdateMove()
     {
-        float now_dir_x = dir_x/Mathf.Abs(dir_x);
-        float now_dir_y = dir_y/Mathf.Abs(dir_y);
+        // 确保 dir_x 和 dir_y 不为 0
+        float now_dir_x = (dir_x != 0) ? dir_x / Mathf.Abs(dir_x) : 0;
+        float now_dir_y = (dir_y != 0) ? dir_y / Mathf.Abs(dir_y) : 0;
 
-            if (dir_x != 0 && dir_y != 0)
+        if (dir_x != 0 && dir_y != 0)
             {
                 rb.velocity = new Vector2(now_dir_x * move_speed * sqrt, now_dir_y * move_speed * sqrt);
             }

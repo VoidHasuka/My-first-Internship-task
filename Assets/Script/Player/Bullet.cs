@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IPoolable
 {
+
     private Camera cam;
     [SerializeField] private Transform target;
     public float angle;
     [SerializeField] private Vector3 move_dir;
     [SerializeField] private float move_speed;
-    [SerializeField] private float lifetime = 5f;
+    [SerializeField] private float lifetime = 3f; //生命周期
+    private float lifetimecount;
     private float chaseDistance = 5f; // 追踪距离
     private Vector3 mouse_position;
+
+
 
 
     private void Start()
@@ -22,23 +26,34 @@ public class Bullet : MonoBehaviour
         mouse_position = cam.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
         
         mouse_position.z = 0;
-            
+
+        lifetimecount = lifetime;
+
+
+
     }
 
     private void Awake()
     {
-        // 查找最近的目标
-        target = FindNearestTarget();
-        Destroy(gameObject, lifetime);
+        
     }
 
     private void Update()
     {
+        // 查找最近的目标
+        target = FindNearestTarget();
+
         WayToTarget();
 
         Move();
 
+        lifetimecount -= Time.deltaTime;
 
+        if(lifetimecount < 0)
+        {
+            //回收
+            ObjectPoolManager.ReturnObject(gameObject);
+        }
     }
 
     private void WayToTarget()
@@ -77,9 +92,10 @@ public class Bullet : MonoBehaviour
         transform.Translate(move_dir * move_speed * Time.deltaTime);
     }
 
+    //感谢我自己还留了个接触摧毁的接口让我不用去翻这个代码
     public void DestroySelf()
     {
-        Destroy(gameObject);
+        ObjectPoolManager.ReturnObject(gameObject);
     }
 
     public void HideObject()
@@ -108,5 +124,43 @@ public class Bullet : MonoBehaviour
         return nearestTarget;
     }
 
-   
+    // 当对象从池中获取时调用，可以理解为新的Start()函数
+    public void OnObjectReuse()
+    {
+
+        // 重置属性
+        lifetimecount = lifetime;
+        mouse_position = cam.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+        mouse_position.z = 0;
+        move_speed = 15;
+        //重置伤害
+        gameObject.GetComponent<Attack>().damage = Player.bulletDamage;
+
+
+    }
+
+
+    // 当对象被回收到池中时调用
+    public void OnObjectReturn()
+    {
+        // 清理状态，准备下次使用
+        //移动
+        transform.Translate(Vector3.zero);
+        move_dir = Vector3.zero;
+        //追踪对象
+        gameObject.GetComponent<Bullet>().target = null;
+
+
+    }
+
+    //禁用轨迹避免撕裂
+    public IEnumerator TrailBan()
+    {
+        TrailRenderer trail = GetComponentInChildren<TrailRenderer>();
+        trail.enabled = false;
+        yield return new WaitForSeconds(0.1f); 
+        trail.enabled = true;
+    }
+
+
 }
